@@ -98,15 +98,31 @@ function showDate($time = null) {
         $time = time();
     }
     
-    echo date('g:i:s a', $time);
+    echo date('g:i:s a', $time) . '<br>';
 }
 
 showDate();
 
 echo '<br>';
 
-sleep(10);
+//sleep(10);
 showDate();
 showDate(time() + 1);
+
+echo strrev('Omar') . '<br>';
+echo str_repeat("\xF0\x9F\x98\x81", 10) . '<br>';
+echo strtoupper('omar') . '<br>';
+echo strtolower('OMARjklfjLsqJ') . '<br>';
+echo str_replace('a', 'i', 'Me llamo Omar') . '<br>';
+echo str_replace(['a', 'e', 'o', 'u', 'A', 'E', 'O', 'U'], 'i', 'Me llamo Omar') . '<br>';
+echo ucfirst('OMAR') . '<br>';
+
+$name = 'OMaR';
+$fname = 'soto';
+
+echo ucfirst(strtolower($name)) . ' '. ucfirst(strtolower($fname)) . '<br>';
+
+echo '<pre>' . print_r($_GET, true) . '</pre></br>';
+echo '<pre>' . print_r($_REQUEST, true) . '</pre></br>';
 
 ?>
