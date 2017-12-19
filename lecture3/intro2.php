@@ -1,0 +1,78 @@
+<?php
+
+echo 'Omar<br>';
+
+echo 'http://sici4997.uprp.edu/~omar/sici4997/lecture3/intro2.php<br>';
+
+echo "Como estás?<br>";
+
+$name = 'Omar';
+$fName = 'Soto';
+
+echo 'Mi nombre es... ' . $name . '<br>';
+
+echo "Mi nombre es... $name $fName<br>";
+
+echo "Mi nombre es... {$name}a<br>";
+
+echo "Mi nombre es... \$name \$fName<br>";
+
+echo "Linea 1\nLinea2\nLinea3\n";
+
+echo nl2br("Linea 1\nLinea2\nLinea3\n");
+
+echo 'Linea 1\nLinea2\nLinea3\n';
+
+echo "\xF0\x9F\x98\x81<br>";
+
+$a = 'Prueba';
+
+echo 'Is String?' . is_string($a) . '<br>';
+
+$b = 20;
+
+echo 'Is String?' . is_string($b) . '<br>';
+echo 'Is Numeric?' . is_numeric($b) . '<br>';
+
+echo "5" + 5 . '<br>';
+
+echo 5 + "5" . '<br>';
+
+$letra = '25';
+echo (int)$letra * 20 . '<br>';
+
+define('MUNICIPAL_TAX', 0.005);
+define('STATE_TAX', 0.11);
+
+$price = 25;
+$taxes = ($price * (MUNICIPAL_TAX + STATE_TAX));
+$taxes = round($taxes, 2);
+$total = $price + $taxes;
+
+echo "Item price: $price<br>";
+echo "Taxes: $taxes<br>";
+echo "Total: $total<br>";
+
+function showIVU($price, $desc = 'UNDEFINED') {
+    $taxes = calculateIVU($price);
+    $total = $price + $taxes;
+    
+    echo "Name: <b>$desc</b><br>";
+    echo "Item price: $price<br>";
+    echo "Taxes: $taxes<br>";
+    echo "Total: $total<br><br>";
+}
+
+function calculateIVU($price) {
+    $taxes = ($price * (MUNICIPAL_TAX + STATE_TAX));
+    $taxes = round($taxes, 2);
+    
+    return $taxes;
+    //return round($taxes, 2);
+}
+
+showIVU(9.99);
+showIVU(5, 'Toilet Paper');
+showIVU(1.99, 'Hand Sanitizer');
+
+?>
