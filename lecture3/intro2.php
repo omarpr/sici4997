@@ -75,4 +75,38 @@ showIVU(9.99);
 showIVU(5, 'Toilet Paper');
 showIVU(1.99, 'Hand Sanitizer');
 
+$scope1 = 'Hola';
+
+function testScoping() {
+    global $scope1;
+    
+    echo $scope1 . '<br>';
+}
+
+function isA($grade) {
+    return ($grade >= 90);
+}
+
+testScoping();
+
+echo 'isA 95? ' . isA(95) . '<br>';
+echo 'isA 100? ' . isA(100) . '<br>';
+echo 'isA 80? ' . isA(80) . '<br>';
+
+function showDate($time = null) {
+    if ($time == null) {
+        $time = time();
+    }
+    
+    echo date('g:i:s a', $time);
+}
+
+showDate();
+
+echo '<br>';
+
+sleep(10);
+showDate();
+showDate(time() + 1);
+
 ?>
