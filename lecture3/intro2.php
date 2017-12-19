@@ -123,6 +123,6 @@ $fname = 'soto';
 echo ucfirst(strtolower($name)) . ' '. ucfirst(strtolower($fname)) . '<br>';
 
 echo '<pre>' . print_r($_GET, true) . '</pre></br>';
-echo '<pre>' . print_r($_REQUEST, true) . '</pre></br>';
+echo '<pre>' . print_r($_SERVER, true) . '</pre></br>';
 
 ?>
