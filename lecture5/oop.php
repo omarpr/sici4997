@@ -84,6 +84,31 @@ class Student extends Person {
     }
 }
 
+class Student2 extends Person {
+    public $grades = [];
+    
+    public function addGrade(EnrolledCourse $grade) {
+        $this->grades[] = $grade;
+    }
+    
+    public function getCalculatedGPA() {
+        $ph = 0;
+        $cr = 0;
+        
+        foreach ($this->grades as $grade) {
+            $cr += $grade->credits;
+            $ph += $grade->getHonorPoints();
+        }
+        
+        return round($ph / $cr, 2);
+    }
+    
+    public function getFullName() {
+        $name = parent::getFullName();
+        return $name . ' (Student)';
+    }
+}
+
 class EnrolledCourse {
     public $code;
     public $section;
@@ -130,5 +155,7 @@ echo 'GPA: ' . $c->getCalculatedGPA() . '<br />';
 $g = new EnrolledCourse('SICI4997', 'M03', 3, 'B');
 
 echo 'PH: ' . $g->getHonorPoints() . '<br>';
+
+echo 'Example with Enrolled Course<br /><br />';
 
 ?>
