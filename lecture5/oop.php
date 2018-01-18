@@ -77,6 +77,41 @@ class Student extends Person {
         
         return round($ph / count($this->grades), 2);
     }
+    
+    public function getFullName() {
+        $name = parent::getFullName();
+        return $name . ' (Student)';
+    }
+}
+
+class EnrolledCourse {
+    public $code;
+    public $section;
+    public $credits = 3;
+    public $grade;
+    
+    public function __construct($code, $section, $credits, $grade) {
+        $this->code = $code;
+        $this->section = $section;
+        $this->credits = $credits;
+        $this->grade = $grade;
+    }
+    
+    public function getHonorPoints() {
+        if ($this->grade == 'A') {
+            $ph = 4;
+        } elseif ($this->grade == 'B') {
+            $ph = 3;
+        } elseif ($this->grade == 'C') {
+            $ph = 2;
+        } elseif ($this->grade == 'D') {
+            $ph = 1;
+        } else {
+            $ph = 0;
+        }
+        
+        return $ph * $this->credits;
+    }
 }
 
 $c = new Student('Omar', 'Soto', 'Fortuno', '2/19/1989');
@@ -91,5 +126,9 @@ echo '<pre>' . print_r($c, true) . '</pre>';
 echo $c->getFullName() . '<br />';
 echo 'Years: ' . $c->getCalculatedAge() . '<br />';
 echo 'GPA: ' . $c->getCalculatedGPA() . '<br />';
+
+$g = new EnrolledCourse('SICI4997', 'M03', 3, 'B');
+
+echo 'PH: ' . $g->getHonorPoints() . '<br>';
 
 ?>
