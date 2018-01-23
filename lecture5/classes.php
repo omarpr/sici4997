@@ -1,6 +1,7 @@
 <?php
 
 class Person {
+    private $id = -1;
     public $firstName;
     public $lastName1;
     public $lastName2;
@@ -11,6 +12,38 @@ class Person {
         $this->lastName1 = $lastName1;
         $this->lastName2 = $lastName2;
         $this->dateOfBirth = $dateOfBirth;
+    }
+    
+    public static function loadByFirstName($firstName) {
+        global $persons;
+        
+        foreach ($persons as $k => $person) {
+            if ($person[0] == $firstName) {
+                $obj = new Person($person[0], $person[1], $person[2], $person[3]);
+                $obj->id = $k;
+                
+                return $obj;
+            }
+        }
+        
+        return null;
+    }
+    
+    public function save() {
+        global $persons;
+        
+        if ($this->id == -1) {
+            // INSERT
+            
+            $persons[] = [$this->firstName, $this->lastName1, $this->lastName2, $this->dateOfBirth];
+            
+            $keys = array_keys($persons);
+            $this->id = $keys[count($keys) - 1];
+        } else {
+            // UPDATE
+            
+            $persons[$this->id] = [$this->firstName, $this->lastName1, $this->lastName2, $this->dateOfBirth];
+        }
     }
     
     public function getFullName() {
@@ -32,26 +65,6 @@ class Person {
         return $age;
     }
 }
-
-$a = new Person();
-$a->firstName = 'Omar';
-$a->lastName1 = 'Soto';
-$a->lastName2 = 'Fortuno';
-$a->dateOfBirth = '2/19/1989';
-
-echo '<pre>' . print_r($a, true) . '</pre>';
-
-$b = new Person('Omar', 'Soto', 'Fortuno', '2/19/1989');
-
-echo '<pre>' . print_r($b, true) . '</pre>';
-
-echo $b->getFullName() . '<br />';
-echo 'Years: ' . $b->getCalculatedAge() . '<br />';
-echo 'Years: ' . $b->getCalculatedAge() . '<br />';
-echo 'Years: ' . $b->getCalculatedAge() . '<br />';
-echo 'Years: ' . $b->getCalculatedAge() . '<br />';
-echo 'Years: ' . $b->getCalculatedAge() . '<br />';
-echo 'Years: ' . $b->getCalculatedAge() . '<br />';
 
 class Student extends Person {
     public $grades = [];
@@ -138,33 +151,5 @@ class EnrolledCourse {
         return $ph * $this->credits;
     }
 }
-
-$c = new Student('Omar', 'Soto', 'Fortuno', '2/19/1989');
-
-$c->addGrade('A');
-$c->addGrade('A');
-$c->addGrade('B');
-$c->addGrade('C'); // SICI 4997
-
-echo '<pre>' . print_r($c, true) . '</pre>';
-
-echo $c->getFullName() . '<br />';
-echo 'Years: ' . $c->getCalculatedAge() . '<br />';
-echo 'GPA: ' . $c->getCalculatedGPA() . '<br />';
-
-$g = new EnrolledCourse('SICI4997', 'M03', 3, 'B');
-
-echo 'PH: ' . $g->getHonorPoints() . '<br>';
-
-echo 'Example with Enrolled Course<br /><br />';
-
-$d = new Student2('Omar', 'Soto', 'Fortuno', '2/19/1989');
-
-$d->addEnrolledCourse(new EnrolledCourse('SICI4997', 'M03', 3, 'B'));
-$d->addEnrolledCourse(new EnrolledCourse('MATE3171', 'M03', 4, 'C'));
-$d->addEnrolledCourse(new EnrolledCourse('SICI3011', 'M03', 3, 'A'));
-
-echo '<pre>' . print_r($d, true) . '</pre>';
-echo 'GPA: ' . $d->getCalculatedGPA() . '<br>';
 
 ?>
