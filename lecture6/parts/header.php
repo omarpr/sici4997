@@ -43,7 +43,7 @@
         <form class="form-inline my-2 my-lg-0">
           <a class="btn btn-outline-info my-2 my-sm-0" href="#">Register</a>
           &nbsp;&nbsp;
-          <a class="btn btn-outline-success my-2 my-sm-0" href="#">Login</a>
+          <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?a=login">Login</a>
         </form>
       </div>
     </nav>

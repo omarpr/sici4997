@@ -9,8 +9,16 @@ $data = [
           'email' => 'ctk@apple.com'],
          ];
 
+$action = (isset($_GET['a'])) ? $_GET['a'] : '';
+
 include './parts/header.php';
-include './parts/body.php';
+
+if ($action == 'login') {
+    include './parts/login.php';
+} else {
+    include './parts/body.php';
+}
+
 include './parts/footer.php';
 
 

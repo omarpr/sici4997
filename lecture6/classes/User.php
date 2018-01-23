@@ -18,6 +18,10 @@ class User {
             }
         }
     }
+    
+    public function validatePassword($password) {
+        return ($password == $this->password);
+    }
 }
 
 ?>
