@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+date_default_timezone_set('EST');
+
 $data = [
          ['username' => 'omarpr',
           'password' => 'test',
@@ -14,6 +17,13 @@ $action = (isset($_GET['a'])) ? $_GET['a'] : '';
 include './classes/User.php';
 include './parts/header.php';
 
+echo '<pre>' . print_r($_SESSION, true)  . '</pre>';
+echo '<pre>' . date('d-M-Y H:m:s', $_SESSION['loginTime']) . '</pre>';
+
+if (isset($_SESSION['userID'])) {
+    //$loggedUser = User::loadFrom
+}
+
 if ($action == 'login') {
     include './parts/login.php';
 } else if ($action == 'doLogin') {
@@ -23,8 +33,8 @@ if ($action == 'login') {
         showError('The user doesn\'t exist.');
         include './parts/login.php';
     } else if ($u->validatePassword($_POST['password'])) {
-        // lo conecto
-        
+        $_SESSION['userID'] = $u->id;
+        $_SESSION['loginTime'] = time();
     } else {
         showError('The entered password is incorrect!');
         include './parts/login.php';
