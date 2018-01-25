@@ -41,9 +41,27 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
+<?php
+
+if (!isset($loggedUser)) {
+
+?>
           <a class="btn btn-outline-info my-2 my-sm-0" href="#">Register</a>
           &nbsp;&nbsp;
           <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?a=login">Login</a>
+<?php
+
+} else {
+  
+  echo 'Hi ' . $loggedUser->username . '&nbsp;';
+
+?>
+          <a class="btn btn-outline-danger my-2 my-sm-0" href="index.php?a=logout">Logout</a>
+<?php
+
+}
+
+?>
         </form>
       </div>
     </nav>
