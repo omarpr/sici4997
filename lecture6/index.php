@@ -17,19 +17,17 @@ include './parts/header.php';
 if ($action == 'login') {
     include './parts/login.php';
 } else if ($action == 'doLogin') {
-    //echo 'LOGIN!!!!';
-    //echo '<pre>' . print_r($_POST, true) . '</pre>';
     $u = User::loadFromUsername($_POST['username']);
     
     if (is_null($u)) {
-        // usuario no existe
-        echo 'Usuario No Existe';
+        showError('The user doesn\'t exist.');
+        include './parts/login.php';
     } else if ($u->validatePassword($_POST['password'])) {
         // lo conecto
-        echo 'Te conectas';
+        
     } else {
-        // password es incorrecto
-        echo 'Password malo.';
+        showError('The entered password is incorrect!');
+        include './parts/login.php';
     }
 } else {
     include './parts/body.php';
@@ -37,5 +35,8 @@ if ($action == 'login') {
 
 include './parts/footer.php';
 
+function showError($msg) {
+    echo '<div class="alert alert-danger" role="alert">' . $msg . '</div>';
+}
 
 ?>
