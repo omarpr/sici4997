@@ -1,7 +1,11 @@
 <?php
 
+//ini_set('session.gc_maxlifetime', 15);
+$maxSessionTime = 60 * 30; // 30 minutes
+
 session_start();
 date_default_timezone_set('EST');
+
 
 $data = [
          ['username' => 'omarpr',
@@ -22,6 +26,12 @@ if (isset($_SESSION['userID'])) {
     if (is_null($loggedUser)) {
         session_destroy();
         session_start();
+    } else {
+        if ((time() - $_SESSION['loginTime']) >= $maxSessionTime) {
+            session_destroy();
+            session_start();
+            $loggedUser = null;
+        }
     }
 }
 

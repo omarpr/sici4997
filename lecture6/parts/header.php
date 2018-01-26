@@ -53,7 +53,7 @@ if (!isset($loggedUser)) {
 
 } else {
   
-  echo 'Hi ' . $loggedUser->username . '&nbsp;';
+  echo '<span style="color: white; font-weight: bold;">Hi ' . $loggedUser->username . '</span>&nbsp;&nbsp;&nbsp;';
 
 ?>
           <a class="btn btn-outline-danger my-2 my-sm-0" href="index.php?a=logout">Logout</a>
