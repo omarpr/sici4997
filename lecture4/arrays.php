@@ -9,8 +9,10 @@ $arr2 = ['Jan' => 'Enero',
          'Mar' => 'Marzo',
          'Abr' => 'Abril'];
 
-echo date('M') . '<br />';
 echo $arr2[date('M')] . '<br />';
+
+
+
 echo $arr2['Feb'] . '<br />';
 
 echo '--- Foreach 1 ---<br /><br />';
@@ -126,6 +128,8 @@ echo '<pre>' . print_r($arr3, true) . '</pre>';
 
 $email = 'omar.soto2@upr.edu';
 $split = explode('@', $email);
+echo $split[0];
+
 echo 'First part of email is: ' . $split[0]. '<br />';
 
 $first = '';

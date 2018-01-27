@@ -31,6 +31,11 @@ if (isset($_SESSION['userID'])) {
             session_destroy();
             session_start();
             $loggedUser = null;
+        } else if ($_SESSION['loginIP'] != $_SERVER['REMOTE_ADDR']) {
+            session_destroy();
+            session_start();
+            $loggedUser = null;
+            //showError('Unauthorized access! Session destroyed!');
         }
     }
 }
@@ -51,6 +56,7 @@ if ($action == 'login') {
     } else if ($u->validatePassword($_POST['password'])) {
         $_SESSION['userID'] = $u->id;
         $_SESSION['loginTime'] = time();
+        $_SESSION['loginIP'] = $_SERVER['REMOTE_ADDR'];
         header('Location: index.php');
     } else {
         showError('The entered password is incorrect!');
