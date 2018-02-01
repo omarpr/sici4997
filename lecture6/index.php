@@ -1,20 +1,9 @@
 <?php
 
-//ini_set('session.gc_maxlifetime', 15);
 $maxSessionTime = 60 * 30; // 30 minutes
 
 session_start();
 date_default_timezone_set('EST');
-
-
-$data = [
-         ['username' => 'omarpr',
-          'password' => 'test',
-          'email' => 'omarpr@gmail.com'],
-         ['username' => 'ctk',
-          'password' => 'test2',
-          'email' => 'ctk@apple.com'],
-         ];
 
 $action = (isset($_GET['a'])) ? $_GET['a'] : '';
 
@@ -63,6 +52,24 @@ if ($action == 'login') {
         showError('The entered password is incorrect!');
         include './parts/login.php';
     }
+} else if ($action == 'register') {
+    include './parts/register.php';
+} else if ($action == 'doRegister') {
+    $u = User::loadFromUsername($_POST['username']);
+    
+    if ($u) {
+        showError('The username already exist.');
+        include './parts/register.php';
+    } else {
+        $u = new User();
+        
+        $u->username = $_POST['username'];
+        $u->password = $_POST['password1'];
+        $u->email = $_POST['email'];
+        $u->save();
+        
+        showSuccess('Welcome to Lecture 6 example!');
+    }
 } else {
     include './parts/body.php';
 }
@@ -76,6 +83,10 @@ if (isset($_SESSION['loginTime'])) {
 
 function showError($msg) {
     echo '<div class="alert alert-danger" role="alert">' . $msg . '</div>';
+}
+
+function showSuccess($msg) {
+    echo '<div class="alert alert-success" role="alert">' . $msg . '</div>';
 }
 
 ?>

@@ -42,6 +42,14 @@ class User {
         return $u;
     }
     
+    public function save() {
+        if ($this->id == -1) {
+            $sql = "INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES (NULL, ?, ?, '', '', ?);";
+            
+            getResultFromSQL($sql, [$this->username, $this->password, $this->email]);
+        }
+    }
+    
     public function validatePassword($password) {
         return ($password == $this->password);
     }
