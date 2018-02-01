@@ -18,6 +18,7 @@ $data = [
 
 $action = (isset($_GET['a'])) ? $_GET['a'] : '';
 
+include 'db.php';
 include './classes/User.php';
 
 if (isset($_SESSION['userID'])) {

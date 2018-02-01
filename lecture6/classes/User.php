@@ -6,17 +6,17 @@ class User {
     public $password;
     public $email;
     
-    public static function loadFromID($id) {
-        global $data;
+    public static function loadFromID($id) {       
+        $records = getResultFromSQL('SELECT * FROM user WHERE id = ?', [$id]);
         
-        if (!isset($data[$id])) {
+        if (count($records) == 0) {
             return null;
         }
         
-        $record = $data[$id];
+        $record = $records[0];
         $u = new User();
         
-        $u->id = $id;
+        $u->id = $record['id'];
         $u->username = $record['username'];
         $u->password = $record['password'];
         $u->email = $record['email'];
@@ -25,22 +25,21 @@ class User {
     }
     
     public static function loadFromUsername($username) {
-        global $data;
+        $records = getResultFromSQL('SELECT * FROM user WHERE username = ?', [$username]);
         
-        $u = new User();
-        
-        foreach ($data as $k => $record) {
-            if ($record['username'] == $username) {
-                $u->id = $k;
-                $u->username = $record['username'];
-                $u->password = $record['password'];
-                $u->email = $record['email'];
-                
-                return $u;
-            }
+        if (count($records) == 0) {
+            return null;
         }
         
-        return null;
+        $record = $records[0];
+        $u = new User();
+        
+        $u->id = $record['id'];
+        $u->username = $record['username'];
+        $u->password = $record['password'];
+        $u->email = $record['email'];
+        
+        return $u;
     }
     
     public function validatePassword($password) {
