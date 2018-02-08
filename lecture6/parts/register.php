@@ -10,6 +10,9 @@ $uname = $_POST['username'] ?? '';
       &nbsp;
     </div>
     <div class="col-sm-6">
+        <div name="registerErrors">
+            
+        </div>
         <form method="post" action="index.php?a=doRegister">
           <div class="form-group">
             <label for="username">Username</label>
@@ -27,7 +30,7 @@ $uname = $_POST['username'] ?? '';
             <label for="password2">Repeat Password</label>
             <input type="password" class="form-control" name="password2" placeholder="Repeat Password">
           </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button name="registerButton" type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
     <div class="col-sm-3">
