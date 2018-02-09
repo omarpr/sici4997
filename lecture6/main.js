@@ -1,6 +1,23 @@
 $(document).ready(function() {
     //alert('Ya cargue');
     
+    $('[name=username]').blur(function () {
+        var username = $('[name=username]');
+        
+        $.get('api.php?a=isUsernameAvailable&u=' + username.val(), function (data) {
+            if (!data.available) {
+                $('div[name=registerErrors]').html('<div class="alert alert-info" role="alert">El usuario "' + username.val() + '" no está disponible.</div>');
+                $('div[name=registerErrors]').fadeIn('slow');
+                $('[name=registerButton]').attr('disabled', 'disabled');
+            } else {
+                $('div[name=registerErrors]').fadeOut('slow', function() {
+                    $('div[name=registerErrors]').html('&nbsp;');
+                });
+                $('[name=registerButton]').removeAttr('disabled');
+            }
+        });
+    });
+    
     $('[name=registerButton]').click(function (e) {
         var errors = "";
         var password1 = $('[name=password1]');
